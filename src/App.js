@@ -1,24 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import Hero from "./components/Hero";
+import { useState } from "react";
+import Footer from "./components/Footer";
+import TodosContainer from "./components/TodosContainer";
+
 
 function App() {
+  const [ todos, setTodos ] = useState([])
+  const [inputValue, setInputValue] = useState('');
+
+  const handleClick = () => {
+    if (inputValue) {
+      setTodos([{id: todos.length+1, todo: inputValue}, ...todos])
+      setInputValue('');
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Hero />
+      <TodosContainer todoList={[]}/>
+      <Footer />
+    </>
+
   );
 }
 
